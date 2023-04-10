@@ -1,0 +1,6 @@
+Flask
+wakeonlan
+scapy
+fastapi
+uvicorn
+sqlalchemy
