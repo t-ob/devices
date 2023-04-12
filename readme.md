@@ -7,8 +7,8 @@ sequenceDiagram
     participant UI as User Interface
     participant API as FastAPI Server
     participant DB as SQLite Database
-    participant Sender as Rust Sender (remote device)
     participant Listener as Rust Listener
+    participant Sender as Rust Sender (remote device)
 
     UI->>UI: Periodic refresh (1 minute)
     UI->>API: GET /devices
