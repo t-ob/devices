@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 interface Device {
+  hostname: string;
   ip_address: string;
   mac_address: string;
   last_seen: string;
@@ -24,10 +25,10 @@ const App: React.FC = () => {
   const [lastRefreshedAt, setLastRefreshedAt] = useState<Date | null>(null);
 
   useEffect(() => {
-    fetchDevices(true);
+    fetchDevices();
 
     const intervalId = setInterval(() => {
-      fetchDevices(false);
+      fetchDevices();
     }, 60 * 1000);
 
     return () => {
@@ -35,13 +36,9 @@ const App: React.FC = () => {
     };
   }, []);
 
-  async function fetchDevices(fromDatabase: boolean = false) {
+  async function fetchDevices() {
     try {
-      const baseUrl = '/scan';
-      const searchParams = new URLSearchParams();
-      searchParams.append('from_database', fromDatabase.toString());
-
-      const response = await fetch(`${baseUrl}?${searchParams.toString()}`);
+      const response = await fetch('/devices');
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
@@ -92,6 +89,7 @@ const App: React.FC = () => {
       <table className="table-auto">
         <thead>
           <tr>
+            <th className="border px-4 py-2">Hostname</th>
             <th className="border px-4 py-2">IP Address</th>
             <th className="border px-4 py-2">MAC Address</th>
             <th className="border px-4 py-2">Last Seen</th>
@@ -101,6 +99,7 @@ const App: React.FC = () => {
         <tbody>
           {devices.map((device, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+              <td className="border px-4 py-2">{device.hostname}</td>
               <td className="border px-4 py-2">{device.ip_address}</td>
               <td className="border px-4 py-2">{device.mac_address}</td>
               <td className="border px-4 py-2">{formatDate(new Date(device.last_seen))}</td>

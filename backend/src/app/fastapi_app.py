@@ -22,6 +22,7 @@ class WakeOnLANResponse(BaseModel):
 class DeviceModel(BaseModel):
     ip_address: str
     mac_address: str
+    hostname: str
     last_seen: datetime
 
 
@@ -80,6 +81,7 @@ def devices() -> DevicesResponse:
             {
                 "ip_address": device.ip_address,
                 "mac_address": device.mac_address,
+                "hostname": device.hostname,
                 "last_seen": device.last_seen.isoformat(),
             }
             for device in devices
