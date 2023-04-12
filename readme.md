@@ -17,11 +17,17 @@ Rust sender: Sends multicast messages with device information (IP, MAC, and host
 
 ```mermaid
 sequenceDiagram
-    participant UI as User Interface
-    participant API as FastAPI Server
-    participant DB as SQLite Database
-    participant Listener as Rust Listener
-    participant Sender as Rust Sender (remote device)
+    box Browser
+    participant UI as User interface
+    end
+    box Raspberry Pi
+    participant API as FastAPI server
+    participant DB as SQLite database
+    participant Listener as Rust listener
+    end
+    box Remote device
+    participant Sender as Rust sender
+    end
 
     UI->>UI: Periodic refresh (1 minute)
     UI->>API: GET /devices
