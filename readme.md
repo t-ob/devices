@@ -10,10 +10,10 @@ My personal use case is to wake up my home server when I'm away from home (or ev
 
 This system is composed of four main components:
 
-FastAPI server: Serves the API for serving device information and sending Wake-on-LAN requests.
-React frontend: A user interface for displaying the list of devices and triggering Wake-on-LAN requests.
-Rust listener: Listens for multicast messages and updates the SQLite database with device information.
-Rust sender: Sends multicast messages with device information (IP, MAC, and hostname) at a regular interval.
+- FastAPI server: Serves the API for serving device information and sending Wake-on-LAN requests.
+- React frontend: A user interface for displaying the list of devices and triggering Wake-on-LAN requests.
+- Rust listener: Listens for multicast messages and updates the SQLite database with device information.
+- Rust sender: Sends multicast messages with device information (IP, MAC, and hostname) at a regular interval.
 
 ```mermaid
 sequenceDiagram
