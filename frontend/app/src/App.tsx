@@ -34,7 +34,7 @@ const App: React.FC = () => {
       clearInterval(intervalId);
     };
   }, []);
-  
+
   async function fetchDevices(fromDatabase: boolean = false) {
     try {
       const baseUrl = '/scan';
@@ -45,8 +45,8 @@ const App: React.FC = () => {
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
-      const {devices} = await response.json();
-      console.log({devices});
+      const { devices } = await response.json();
+      console.log({ devices });
       setDevices(devices);
       setLastRefreshedAt(new Date());
     } catch (error) {
